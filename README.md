@@ -8,7 +8,7 @@ To customize size use the custom.css file like this:
 
 Example:
 
-If you config.js you use 'bottom_bar', 'middle_center'...etc then add this to your custom.css file:
+If in your config.js you use 'bottom_bar', 'middle_center'...etc then add this to your custom.css file:
 
 .MMM-Recipe .wrapper {
 	width: 100%;

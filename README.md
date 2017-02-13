@@ -27,4 +27,11 @@ Either should work just fine!   Changes recipe once a day!
 
 If you don't want the header simply leave that config option out!
 
+Rememer custom colors can be used in the following way in the custom.css file:
 
+.MMM-Recipe .header {
+    color: #fff;
+    }
+    
+    You can customize color using these tags:
+    header, div, h3 or p

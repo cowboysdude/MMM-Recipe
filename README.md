@@ -4,23 +4,27 @@ Daily recipe for MagicMirror2
 
 This module shows a menu daily on the MagicMirror2
 
-To customize size use the custom.css file like this:
+To customize size and header title use the config options:
 
 Example:
+{
+  module: 'MMM-Recipe',
+  position: 'bottom_bar',
+       config: {
+	  maxWidth: "100%",
+	  header: "John's Marvelous Kitchen Recipes",
+               }
+ },
+  
 
-If in your config.js you use 'bottom_bar', 'middle_center'...etc then add this to your custom.css file:
+You can use % or px...   This would be a bottom_bar size :)
+Example:  top_left
+maxWidth = "33%" 
+    OR
+maxWidth = "400px"
 
-.MMM-Recipe .wrapper {
-	width: 100%;
-	float: right;
-	display: inline;
-}
-.MMM-Recipe .recipeLogo {
-	width: 5%;
-	height: 5%;
-	float: left;
-	border: 20px solid #000;
+Either should work just fine!   Changes recipe once a day!
 
-This will give you the entire bottom bar area with the recipe.
+If you don't want the header simply leave that config option out!
 
-If you want to use it in positions such as 'top_left', 'top_right', 'lower_right', 'lower_left'... no changes need to be made :)
+

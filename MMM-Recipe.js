@@ -1,4 +1,4 @@
- /* Magic Mirror
+  /* Magic Mirror
     * Module: MMM-Recipe
     *
     * By cowboysdude
@@ -34,7 +34,7 @@ Module.register("MMM-Recipe", {
            moment.locale(config.language);
 
            this.today = "";
-           this.recipe = {};
+           this.recipe = [];
            this.url = "http://www.themealdb.com/api/json/v1/1/random.php";        
            this.scheduleUpdate();
        },

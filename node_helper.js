@@ -46,7 +46,7 @@ module.exports = NodeHelper.create({
             if (err) {
                 return console.log(err);
             }
-            console.log("The file was saved!");
+            console.log("The Recipe file was saved!");
         });
     },
 

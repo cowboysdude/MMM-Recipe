@@ -4,7 +4,6 @@
   "description": "",
   "main": "MMM-Recipe.js",
   "dependencies": {
-    "request": "^2.79.0",
     "semver": "^5.3.0"
   },
   "devDependencies": {},

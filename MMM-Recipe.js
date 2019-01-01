@@ -46,18 +46,17 @@
           var ingredient = meal.strIngredient1;
           console.log(meal);
 
-          // Here's a solution.
+          // From here this is new.
           const newArray = meals.reduce((array, meal) => {
               // Rather than iterate over ALL of the keys, just 
               // do this, basically 50% of the keys. 
               const subArray = Object.keys(meal).filter(key => key.indexOf('strIngredient' == -1));
               console.log(subArray);
-              // Basically add some ojects to the array.
+              // Add some ojects to the array.
               subArray.forEach(key => {
                   const int = key.replace(/\D/g, '');
                   const measureKey = `strMeasure${int}`;
                   const ingredientKey = `strIngredient${int}`;
-
                   const obj = {
                       ingredient: meal[ingredientKey],
                       measure: meal[measureKey]
@@ -65,10 +64,8 @@
                   console.log(obj);
                   array.push(obj);
               });
-
               // Make sure to return the array.
               return array;
-
           }, []);
 
           // Now just print the resuts, and make sure that you know 

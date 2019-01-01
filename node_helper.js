@@ -11,18 +11,7 @@ const fs = require('fs');
 module.exports = NodeHelper.create({
 
     start: function() {
-        this.recipe = {
-            timestamp: null,
-            data: null
-        };
-        this.path = "modules/MMM-Recipe/recipe.json";
-        if (fs.existsSync(this.path)) {
-            var temp = JSON.parse(fs.readFileSync(this.path, 'utf8'));
-            if (temp.timestamp === this.getDate()) {
-                this.recipe = temp;
-            }
-            //console.log(temp);
-        }
+       console.log('starting Node_helper for '+this.name);
 
     },
 
@@ -31,38 +20,21 @@ module.exports = NodeHelper.create({
             url: url,
             method: 'GET'
         }, (error, response, body) => {
-            if (!error && response.statusCode == 200) {
-                var result = JSON.parse(body).meals[0];
-                this.sendSocketNotification('RECIPE_RESULT', result);
-                this.recipe.timestamp = this.getDate();
-                this.recipe.data = result;
-                this.fileWrite();
+            if (!error && response.statusCode == 200) { 
+                var result = JSON.parse(body);  
+				//console.log(result);
+				this.sendSocketNotification('RECIPE_RESULT', result);
             }
         });
-    },
-
-    fileWrite: function() {
-        fs.writeFile(this.path, JSON.stringify(this.recipe), function(err) {
-            if (err) {
-                return console.log(err);
-            }
-            console.log("The Recipe file was saved!");
-        });
-    },
-
-    getDate: function() {
-        return (new Date()).toLocaleDateString();
-    },
+    }, 
 
     //Subclass socketNotificationReceived received.
     socketNotificationReceived: function(notification, payload) {
         if (notification === 'GET_RECIPE') {
-            if (this.recipe.timestamp === this.getDate() && this.recipe.data !== null) {
-                this.sendSocketNotification('RECIPE_RESULT', this.recipe.data);
-            } else {
+             
                 this.getRecipe(payload);
             }
         }
-    }
+  
 
 });

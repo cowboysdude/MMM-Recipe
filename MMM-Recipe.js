@@ -40,23 +40,22 @@
 
       getDom: function() {
 
-          // Just some demo.
-          var meals = this.recipe.meals[0];
-          var meal = meals;
-          var ingredient = meal.strIngredient1;
-          console.log(meal);
+          // Just some TESTING.
+          var meals = this.recipe.meals;  //returns array
+          var meal = meals[0]; // returns object
 
-          // From here this is new.
+          // Start here to rename keys and match them to the ingredients.
           const newArray = meals.reduce((array, meal) => {
               // Rather than iterate over ALL of the keys, just 
               // do this, basically 50% of the keys. 
               const subArray = Object.keys(meal).filter(key => key.indexOf('strIngredient' == -1));
               console.log(subArray);
-              // Add some ojects to the array.
+              // Basically add some ojects to the array.
               subArray.forEach(key => {
                   const int = key.replace(/\D/g, '');
                   const measureKey = `strMeasure${int}`;
                   const ingredientKey = `strIngredient${int}`;
+
                   const obj = {
                       ingredient: meal[ingredientKey],
                       measure: meal[measureKey]
@@ -64,13 +63,15 @@
                   console.log(obj);
                   array.push(obj);
               });
+
               // Make sure to return the array.
               return array;
+
           }, []);
 
           // Now just print the resuts, and make sure that you know 
           // and alert that the app has finished. 
-          console.log(newArray);
+          console.log(newArray, "FINISHED");
 
           //this.loaded = true;
           var wrapper = document.createElement("div");

@@ -28,28 +28,40 @@ module.exports = NodeHelper.create({
                 // Start here to rename keys and match them to the ingredients.
 				//result.meals.forEach(meal => Object.keys(meal).forEach(key => console.log(meal[key])));
                 const newArray = meals.reduce((array, meal) => {
+					
                     // Rather than iterate over ALL of the keys, just 
                     // do this, basically 50% of the keys. 
                     const subArray = Object.keys(meal).filter(key => key.indexOf('strIngredient' == -1));
-                    // console.log(subArray);
+                     //console.log(subArray); //this returns 1 of each
                     // Basically add some ojects to the array.
-                    subArray.forEach(key => {
+					
+		//I'm sure the problem is the next line but not sure how to fix it........ 
+					subArray.forEach(key => {
+		//Tried replacing it with a loop but apparently didn't get it right......
                         const int = key.replace(/\D/g, '');
+						//console.log(int);
                         const measureKey = `strMeasure${int}`;
                         const ingredientKey = `strIngredient${int}`;  
-					//console.log(ingredientKey);
+					console.log(ingredientKey);
                         const obj = {
                             measure: meal[measureKey],
                             ingredient: meal[ingredientKey]
                         };
-                         // console.log(obj);  //Testing data before
-                         
+                       // console.log(obj);  //Testing data before
+                        
+						// getting rid of blanks 
 						if (obj.measure && obj.ingredient != 'undefined' || undefined || '' || null) {
-                         array.push(obj);
-                              console.log(array);  //Testing data after
+						 array.push(obj);
+                          //    console.log(array);  //Testing data after
                         }
-                    });
+                    });  
+                    // Make sure to return the array.
+                    return array;
 
+                }, []); 
+				
+			 //just adding whats remaining to the new array......
+               
                     const recipeName = meal.strMeal;
                     const instruction = meal.strInstructions;
                     const video = meal.strYoutube;
@@ -57,27 +69,17 @@ module.exports = NodeHelper.create({
                     const nation = meal.strArea;
                     const category = meal.strCategory;
 
-                    const recipe = {instructions: {
+                    const recipe =  {
                         recipeName,
                         instruction,
                         video,
                         thumb,
                         nation,
                         category
-                    } };
-                    array.push(recipe);
-                    //console.log(recipe);  Testing full array
-
-                    // Make sure to return the array.
-                    return array;
-
-                }, []);
-
-                // Now just print the resuts, and make sure that you know 
-                // and alert that the app has finished.
-
-
-                //console.log(newArray, "FINISHED");
+                    };
+                    newArray.push(recipe);
+					 
+           //    console.log(newArray, "FINISHED");
 
                 this.sendSocketNotification('RECIPE_RESULT', newArray);
             }

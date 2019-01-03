@@ -1,7 +1,7 @@
 # MMM-Recipe
 Daily recipe for MagicMirror2
 
-##Examples:
+#Examples:
 
 Simple recipe
 ![](examples/recipe1.png)

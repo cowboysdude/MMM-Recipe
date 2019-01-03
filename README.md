@@ -1,8 +1,15 @@
 # MMM-Recipe
 Daily recipe for MagicMirror2
 
+##Examples:
+
+Simple recipe
 ![](examples/recipe1.png)
+
+Example showing video
 ![](examples/recipe2.png)
+
+
 ![](examples/recipe3.png)
 
 This module shows a menu daily on the MagicMirror2

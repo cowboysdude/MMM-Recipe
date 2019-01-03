@@ -1,122 +1,125 @@
   /* Magic Mirror
-    * Module: MMM-Recipe
-    *
-    * By cowboysdude
-    * 
-    */
-   
-Module.register("MMM-Recipe", {
+   * Module: MMM-Recipe
+   *
+   * By cowboysdude
+   * 
+   */
+  Module.register("MMM-Recipe", {
 
-       // Module config defaults.
-       defaults: {
-           updateInterval: 120000, // every 10 minutes
-           animationSpeed: 1000,
-           initialLoadDelay: 1130, // 0 seconds delay
-           retryDelay: 2500,
-           header: "",
-           maxWidth: "400px",
-       },
+      // Module config defaults.
+      defaults: {
+          updateInterval: 120000, // every 10 minutes
+          animationSpeed: 1000,
+          initialLoadDelay: 1130, // 0 seconds delay
+          retryDelay: 2500,
+          header: "",
+          maxWidth: "220px",
+          video: true
+      },
 
-       // Define required scripts.
-       getScripts: function() {
-           return ["moment.js"];
-       },
-       
-       getStyles: function() {
-           return ["MMM-Recipe.css", "font-awesome.css"];
-       },
+      // Define required scripts.
+      getScripts: function() {
+          return ["moment.js", "mediabox.js"];
+      },
 
-       // Define start sequence.
-       start: function() {
-           Log.info("Starting module: " + this.name);
+      getStyles: function() {
+          return ["MMM-Recipe.css", "font-awesome.css"];
+      },
 
-           // Set locale.
-           moment.locale(config.language);
+      // Define start sequence.
+      start: function() {
+          var info = this.data;
+          var moduleInfo = JSON.parse(JSON.stringify(info));
+          Log.info("Starting module: " + this.name);
 
-           this.today = "";
-           this.recipe = [];
-           this.url = "http://www.themealdb.com/api/json/v1/1/random.php";        
-           this.scheduleUpdate();
-       },
+          // Set locale.
+          moment.locale(config.language);
+
+          this.today = "";
+          this.recipe = [];
+          this.scheduleUpdate();
+      },
 
       getDom: function() {
 
-         var recipe = this.recipe;
-
-         var wrapper = document.createElement("div");
-         wrapper.className = "wrapper";
-         wrapper.style.maxWidth = this.config.maxWidth;
-         
-
-         if (!this.loaded) {
-             wrapper.innerHTML = "Mixing ingrediants...";
-             wrapper.className = "bright light small";
-             return wrapper;
-         }
-         if (this.config.header != "" ){
-         var header = document.createElement("header");
-         header.className = "header";
-         header.innerHTML = this.config.header;
-         wrapper.appendChild(header);
-		 }
-		 
-         var top = document.createElement("div");
-         top.classList.add("content");
-
-         var newsLogo = document.createElement("div");
-         var newsIcon = document.createElement("img");
-         newsIcon.src = recipe.strMealThumb;
-         newsIcon.classList.add("imgDes");
-         newsLogo.appendChild(newsIcon);
-         top.appendChild(newsLogo);
-
-         var title = document.createElement("h3");
-         title.classList.add("small");
-         //title.className = "medium bright";
-         title.innerHTML = recipe.strMeal + "  ~  Dish: " + recipe.strArea;
-         top.appendChild(title);
 
 
-         var des = document.createElement("p");
-         //des..classList.add("dimmed", "light", "small");
-         des.classList.add("xsmall", "bright");
-         //var str = recipe.strInstructions;
-         //if(str.length > 10) str = str.substring(0,190);
-         des.innerHTML = recipe.strInstructions;
-         //des.innerHTML = str + "...";
-         top.appendChild(des);
-
-         wrapper.appendChild(top);
-         return wrapper;
-
-     },
-
-     processRecipe: function(data) {
-         //	console.log(data);
-         this.today = data.Today;
-         this.recipe = data;
-         this.loaded = true;
-     },
-
-     scheduleUpdate: function() {
-         setInterval(() => {
-             this.getRecipe();
-         }, this.config.updateInterval);
-
-         this.getRecipe(this.config.initialLoadDelay);
-     },
+          //this.loaded = true;
+          var wrapper = document.createElement("div");
+          wrapper.className = "wrapper";
+          wrapper.style.maxWidth = this.config.maxWidth;
 
 
-     getRecipe: function() {
-         this.sendSocketNotification('GET_RECIPE', this.url);
-     },
 
-     socketNotificationReceived: function(notification, payload) {
-         if (notification === "RECIPE_RESULT") {
-             this.processRecipe(payload);
-             this.updateDom(this.config.fadeSpeed);
-         }
-         this.updateDom(this.config.initialLoadDelay);
-     },
+          var top = document.createElement("div");
+          top.classList.add("clearfix");
 
- });
+          var mixins = this.recipe;
+          console.log(mixins.ingredients);
+
+          var title = document.createElement("p");
+          title.classList.add("title");
+          title.innerHTML = `~  Dish: ${mixins.recipeName}  <br>~  Nationality: ${mixins.nation}  ~  Category: ${mixins.category}`;
+          top.appendChild(title);
+		  
+          var ingred = document.createElement("div");
+          ingred.classList.add("box", "title");
+          for (i = 0; i < mixins.ingredients.length; i++) {
+              var ing = mixins.ingredients[i].ingredient;
+              console.log(ing);
+              ingred.innerHTML += ing + "<br>";
+          }
+          top.appendChild(ingred);
+
+
+          var des = document.createElement("p");
+          des.classList.add("boxinst");
+          const truncate = (str, len) => str.substring(0, (str + ' ').lastIndexOf(' ', len));
+          des.innerHTML = truncate(mixins.instruction, 154) + "<div class='tooltip'>...read more mouse over this <span class='tooltiptext'>"+mixins.instruction+"</span></div>";
+          top.appendChild(des); 
+		  
+		  var x = document.createElement(null);
+          if (this.config.video != false) {
+              x.innerHTML =
+                  `<a href="${mixins.video}" class="mediabox"><img class= thumbs src="${mixins.thumb}"></a>`;
+          } else {
+              x.innerHTML = `<img class= thumbs src="${mixins.thumb}">`
+          }
+          wrapper.appendChild(x);
+
+          MediaBox('.mediabox');
+          wrapper.appendChild(top);
+
+          return wrapper;
+
+      },
+
+      processRecipe: function(data) {
+          //	console.log(data);
+          this.today = data.Today;
+          this.recipe = data;
+          console.log(this.recipe);
+          this.loaded = true;
+      },
+
+      scheduleUpdate: function() {
+          setInterval(() => {
+              this.getRecipe();
+          }, this.config.updateInterval);
+
+          this.getRecipe(this.config.initialLoadDelay);
+      },
+
+      getRecipe: function() {
+          this.sendSocketNotification('GET_RECIPE');
+      },
+
+      socketNotificationReceived: function(notification, payload) {
+          if (notification === "RECIPE_RESULT") {
+              this.processRecipe(payload);
+              this.updateDom(this.config.fadeSpeed);
+          }
+          this.updateDom(this.config.initialLoadDelay);
+      },
+
+  });

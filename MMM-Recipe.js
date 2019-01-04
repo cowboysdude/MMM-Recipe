@@ -47,7 +47,8 @@
           var wrapper = document.createElement("table");
 		  
           var top = document.createElement("th");
-		  top.innerHTML= `${mixins.recipeName}`; 
+	  top.className = "rName";
+          top.innerHTML= `${mixins.recipeName}`; 
 
           var title = document.createElement("tr");
           title.classList.add("ingred");

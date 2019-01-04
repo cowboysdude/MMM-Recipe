@@ -1,0 +1,38 @@
+label {
+      display: inline-block;
+      color: #fff;
+      padding: 10px 15px;
+      background-color: #3c8dbc;
+      border-color: #367fa9;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .checker:checked + .modal {
+      display: flex;
+    }
+    .modal {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      text-align: center;
+      background-color: rgba(0,0,0,.8); 
+    }
+    .modal-body {
+      width: 400px;
+      background-color: #000;
+	  color: #fff;
+      border-radius: 4px;
+      padding: 15px;
+    }
+    .modal-content {
+	  line-height: 1.1em;	
+      padding: 15px; 
+    }
+    .modal-footer {
+      overflow: hidden;
+    }

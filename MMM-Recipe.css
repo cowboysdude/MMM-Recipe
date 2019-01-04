@@ -136,6 +136,10 @@ Adapted by: Pedro Rogerio for mediabox v0.0.2 | https://github.com/pinceladasdaw
         bottom: 262px;
     }
 } 
+.MMM-Recipe rname { 
+font-size: .3em;
+line-height: 130%; 
+}
 .MMM-Recipe .thumbs{
 	float: left;
 	margin: 10px;

@@ -1,4 +1,4 @@
-  /* Magic Mirror
+    /* Magic Mirror
    * Module: MMM-Recipe
    *
    * By cowboysdude
@@ -8,7 +8,7 @@
 
       // Module config defaults.
       defaults: {
-          updateInterval: 120000, // every 10 minutes
+          updateInterval: 180 * 60 * 1000, // every 3 hours
           animationSpeed: 1000,
           initialLoadDelay: 1130, // 0 seconds delay
           retryDelay: 2500,
@@ -23,7 +23,7 @@
       },
 
       getStyles: function() {
-          return ["MMM-Recipe.css", "font-awesome.css"];
+          return ["MMM-Recipe.css", "modal.css"];
       },
 
       // Define start sequence.
@@ -40,54 +40,57 @@
           this.scheduleUpdate();
       },
 
-      getDom: function() {
+      getDom: function() { 
+	  
+	      var mixins = this.recipe;
+          
+          var wrapper = document.createElement("table");
+		  
+          var top = document.createElement("th");
+		  top.innerHTML= `${mixins.recipeName}`; 
 
-
-
-          //this.loaded = true;
-          var wrapper = document.createElement("div");
-          wrapper.className = "wrapper";
-          wrapper.style.maxWidth = this.config.maxWidth;
-
-
-
-          var top = document.createElement("div");
-          top.classList.add("clearfix");
-
-          var mixins = this.recipe;
-          console.log(mixins.ingredients);
-
-          var title = document.createElement("p");
-          title.classList.add("title");
-          title.innerHTML = `~  Dish: ${mixins.recipeName}  <br>~  Nationality: ${mixins.nation}  ~  Category: ${mixins.category}`;
+          var title = document.createElement("tr");
+          title.classList.add("ingred");
+          title.innerHTML = `<br>Nationality: ${mixins.nation}  <br>Category: ${mixins.category}`;
           top.appendChild(title);
+		  wrapper.appendChild(top);
 		  
-          var ingred = document.createElement("div");
-          ingred.classList.add("box", "title");
-          for (i = 0; i < mixins.ingredients.length; i++) {
-              var ing = mixins.ingredients[i].ingredient;
-              console.log(ing);
-              ingred.innerHTML += ing + "<br>";
-          }
-          top.appendChild(ingred);
-
-
-          var des = document.createElement("p");
-          des.classList.add("boxinst");
-          const truncate = (str, len) => str.substring(0, (str + ' ').lastIndexOf(' ', len));
-          des.innerHTML = truncate(mixins.instruction, 154) + "<div class='tooltip'>...read more mouse over this <span class='tooltiptext'>"+mixins.instruction+"</span></div>";
-          top.appendChild(des); 
-		  
-		  var x = document.createElement(null);
+		  var x = document.createElement("td");
           if (this.config.video != false) {
               x.innerHTML =
                   `<a href="${mixins.video}" class="mediabox"><img class= thumbs src="${mixins.thumb}"></a>`;
           } else {
               x.innerHTML = `<img class= thumbs src="${mixins.thumb}">`
           }
-          wrapper.appendChild(x);
+          top.appendChild(x); 
+		  
+		  var ingred = document.createElement("td");
+          ingred.classList.add("title");
+          for (i = 0; i < mixins.ingredients.length; i++) { 
+              ingred.innerHTML += mixins.ingredients[i].ingredient + "<br>";
+          }
+          top.appendChild(ingred);
+		  wrapper.appendChild(top);
 
-          MediaBox('.mediabox');
+           var des = document.createElement("div");
+          des.classList.add("boxinst"); 
+          des.innerHTML = `
+		  <label for="o">Instructions</label>
+			<input class="checker" type="checkbox" id="o" hidden>
+				<div class="modal">
+				<div class="modal-body">
+				<div class="modal-content">Instructions:<br>${mixins.instruction}</div>
+				<div class="modal-footer">
+				<label for="o">close</label>
+				</div>
+			  </div>
+			</div>`;
+          top.appendChild(des);  
+		  
+
+           
+
+          MediaBox('.mediabox'); 
           wrapper.appendChild(top);
 
           return wrapper;
@@ -99,7 +102,7 @@
           this.today = data.Today;
           this.recipe = data;
           console.log(this.recipe);
-          this.loaded = true;
+          this.loaded = false;
       },
 
       scheduleUpdate: function() {

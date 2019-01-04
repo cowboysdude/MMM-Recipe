@@ -135,27 +135,28 @@ Adapted by: Pedro Rogerio for mediabox v0.0.2 | https://github.com/pinceladasdaw
     .mediabox-close {
         bottom: 262px;
     }
-}
+} 
 .MMM-Recipe .thumbs{
 	float: left;
 	margin: 10px;
 	width: 138px;
 	height: 137px;
 }
-.MMM-Recipe .title {
-	width 45%;
+.MMM-Recipe .ingred {
+	width 75%;
+	font-size: .5em;
+	margin-bottom: 4px; 
+}
+.MMM-Recipe .title { 
 	font-size: .5em;
 	line-height: 90%;
-	margin-bottom: 4px; 
+    margin: 0;	
 } 
 * {
   box-sizing: border-box;
 }
 .boxinst { 
-  width: 25.00%;
   font-size: .5em;
-  line-height: 98%;
-  margin-bottom: 4px;
 }
 .box {
   float: left;
@@ -168,46 +169,19 @@ Adapted by: Pedro Rogerio for mediabox v0.0.2 | https://github.com/pinceladasdaw
   clear: both;
   display: table;
 }
-.MMM-Recipe .tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black;
-} 
-.MMM-Recipe .tooltip .tooltiptext {
-  font-family: 'Oxygen', sans-serif; 
-  visibility: hidden;
-  width: 320px;
-  height: 100%;
-  background-color: #000;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0; 
-  z-index: 1;
-  bottom: 12%;
-  left: 50%;
-  margin-left: -60px;
-  opacity: 0;
-  transition: opacity 0.3s;
-  font-size: .6em;
-  line-height: 180%;
+.MMM-Recipe table {
+	 padding: 0px;
+	 width: 400px;
 }
-
-.MMM-Recipe .tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 1%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #fff transparent transparent transparent;
+.MMM-Recipe th {
+	width: 255px;
+	line-height: .5em;
+	vertical-align:top;
+	margin: 0; 
 }
-
-.MMM-Recipe .tooltip:hover .tooltiptext {
-  visibility: visible;
-  width: 110%;
-  line-height: 150%;
-  font-size: 18px;
-  opacity: 1;
+.MMM-Recipe td {
+	width: 155px;
+	vertical-align:top;
+	margin: 0; 
 }
+.MMM-Recipe tr {vertical-align:top;}

@@ -1,4 +1,4 @@
-    /* Magic Mirror
+/* Magic Mirror
    * Module: MMM-Recipe
    *
    * By cowboysdude
@@ -23,7 +23,7 @@
       },
 
       getStyles: function() {
-          return ["MMM-Recipe.css", "modal.css"];
+          return ["MMM-Recipe.css", "mediabox.css"];
       },
 
       // Define start sequence.
@@ -40,43 +40,17 @@
           this.scheduleUpdate();
       },
 
-      getDom: function() { 
-	  
-	      var mixins = this.recipe;
-          
-          var wrapper = document.createElement("table");
-		  
-          var top = document.createElement("th");
-	  top.className = "rName";
-          top.innerHTML= `${mixins.recipeName}`; 
+      getDom: function() {
 
-          var title = document.createElement("tr");
-          title.classList.add("ingred");
-          title.innerHTML = `<br>Nationality: ${mixins.nation}  <br>Category: ${mixins.category}`;
-          top.appendChild(title);
-		  wrapper.appendChild(top);
-		  
-		  var x = document.createElement("td");
-          if (this.config.video != false) {
-              x.innerHTML =
-                  `<a href="${mixins.video}" class="mediabox"><img class= thumbs src="${mixins.thumb}"></a>`;
-          } else {
-              x.innerHTML = `<img class= thumbs src="${mixins.thumb}">`
-          }
-          top.appendChild(x); 
-		  
-		  var ingred = document.createElement("td");
-          ingred.classList.add("title");
-          for (i = 0; i < mixins.ingredients.length; i++) { 
-              ingred.innerHTML += mixins.ingredients[i].ingredient + "<br>";
-          }
-          top.appendChild(ingred);
-		  wrapper.appendChild(top);
+          var mixins = this.recipe;
 
-           var des = document.createElement("div");
-          des.classList.add("boxinst"); 
-          des.innerHTML = `
-		  <label for="o">Instructions</label>
+          var wrapper = document.createElement("div");
+          wrapper.id = "flex-container";
+
+          var top = document.createElement("div");
+          top.classList.add("flex-item", "title");
+          top.innerHTML = `${mixins.recipeName}<br>Nationality: ${mixins.nation}<br>Category: ${mixins.category}<br>
+		         <br><br><label for="o">Instructions</label>
 			<input class="checker" type="checkbox" id="o" hidden>
 				<div class="modal">
 				<div class="modal-body">
@@ -85,21 +59,33 @@
 				<label for="o">close</label>
 				</div>
 			  </div>
-			</div>`;
-          top.appendChild(des);  
-		  
-
-           
-
-          MediaBox('.mediabox'); 
+			</div>  `;
           wrapper.appendChild(top);
+
+          var x = document.createElement("div");
+          x.classList.add("ingred");
+          if (this.config.video != false) {
+              x.innerHTML = `<a href="${mixins.video}" class="mediabox"><img class= thumbs src="${mixins.thumb}"></a><br>
+			                `;
+          } else {
+              x.innerHTML = `<img class= thumbs src="${mixins.thumb}">`;
+          }
+          wrapper.appendChild(x);
+
+          var ingred = document.createElement("ul");
+          ingred.classList.add("flex-item", "title");
+          for (i = 0; i < mixins.ingredients.length; i++) {
+              ingred.innerHTML += `<li>${mixins.ingredients[i].ingredient}</li>`
+          }
+          wrapper.appendChild(ingred);
+
+          MediaBox('.mediabox');
 
           return wrapper;
 
       },
 
       processRecipe: function(data) {
-          //	console.log(data);
           this.today = data.Today;
           this.recipe = data;
           console.log(this.recipe);

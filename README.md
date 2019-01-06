@@ -1,4 +1,7 @@
 # MMM-Recipe
+
+ STILL BEING TESTED AND MMM-voice has conflicts with it at the moment..........working on it.
+ 
 Daily recipe for MagicMirror2  ALL NEW FOR 2019
 This is a positional module.....bottom_bar
 If you try to put it in other positions you will have to fix the css ..... I built this to work in one position and the reason for that is the list of ingredients vary from recipe to recipe and at times the entire bottom_bar space will be needed!

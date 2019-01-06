@@ -37,20 +37,24 @@
 
           this.today = "";
           this.recipe = [];
+		  this.list = [];
+		  this.image = "";
           this.scheduleUpdate();
       },
 
       getDom: function() {
 
           var mixins = this.recipe;
-
+		  var image = this.image;
+		  var list = this.list;
+		   
           var wrapper = document.createElement("div");
           wrapper.id = "flex-container";
 
           var top = document.createElement("div");
           top.classList.add("flex-item", "title");
           top.innerHTML = `${mixins.recipeName}<br>Nationality: ${mixins.nation}<br>Category: ${mixins.category}<br>
-		         <br><br><label for="o">Instructions</label>
+		                        <BR><BR><label for="o">Instructions</label>
 			<input class="checker" type="checkbox" id="o" hidden>
 				<div class="modal">
 				<div class="modal-body">
@@ -65,17 +69,17 @@
           var x = document.createElement("div");
           x.classList.add("ingred");
           if (this.config.video != false) {
-              x.innerHTML = `<a href="${mixins.video}" class="mediabox"><img class= thumbs src="${mixins.thumb}"></a><br>
+              x.innerHTML = `<a href="${mixins.video}" class="mediabox"><img class= thumbs src="${image}"></a><br>
 			                `;
           } else {
-              x.innerHTML = `<img class= thumbs src="${mixins.thumb}">`;
+              x.innerHTML = `<img class= thumbs src="${image}">`;
           }
           wrapper.appendChild(x);
 
           var ingred = document.createElement("ul");
           ingred.classList.add("flex-item", "title");
-          for (i = 0; i < mixins.ingredients.length; i++) {
-              ingred.innerHTML += `<li>${mixins.ingredients[i].ingredient}</li>`
+          for (i = 0; i < list.length; i++) {
+              ingred.innerHTML += `<li>${list[i].ingredient}</li>`
           }
           wrapper.appendChild(ingred);
 
@@ -88,7 +92,9 @@
       processRecipe: function(data) {
           this.today = data.Today;
           this.recipe = data;
-          console.log(this.recipe);
+		  this.list = data.ingredients;
+		  this.image = data.thumb;
+          console.log(this.image);
           this.loaded = false;
       },
 

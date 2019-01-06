@@ -1,191 +1,101 @@
-/*
-Style By: Qassim Hassan
-Twitter: @QQQHZ
-Websites: wp-time.com | qass.im | wp-plugins.in
-Copyright (c) 2016 - Qassim Hassan
-Adapted by: Pedro Rogerio for mediabox v0.0.2 | https://github.com/pinceladasdaweb/mediabox */
-.mediabox-wrap {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: #000;
-    background-color: rgba(0,0,0,0.8);
-    top: 0;
-    left: 0;
-    opacity: 0;
-    z-index: 999;
-    -webkit-animation-duration: 0.5s;
-    animation-duration: 0.5s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-    -webkit-animation-name: mediabox;
-    animation-name: mediabox;
-}
-
-@-webkit-keyframes mediabox {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@keyframes mediabox {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-.mediabox-content {
-    max-width: 680px;
-    display: block;
+.MMM-Recipe #flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 55%; 
     margin: 0 auto;
-    height: 100%;
-    position: relative;
+	float: left;
 }
 
-.mediabox-content iframe {
-    max-width: 100% !important;
-    width: 100% !important;
-    display: block !important;
-    height: 480px !important;
-    border: none !important;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto 0;
+.MMM-Recipe .flex-item {
+    width: 60.5%;
+    height: 200px;
+    align-items: left;
+    line-height: 87%;	
 }
-
-.mediabox-hide {
-    -webkit-animation-duration: 0.5s;
-    animation-duration: 0.5s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-    -webkit-animation-name: mediaboxhide;
-    animation-name: mediaboxhide;
+.MMM-Recipe ul {
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 200px;
+  height: 200px; 
 }
-
-@-webkit-keyframes mediaboxhide {
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-    }
+.MMM-Recipe li {
+  height: 12%;
+  text-align: justify;
+  text-justify: inter-word;
+  padding-left: 10px;
+  
 }
-
-@keyframes mediaboxhide {
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-    }
-}
-
-.mediabox-close {
-    position: absolute;
-    top: 0;
-    cursor: pointer;
-    bottom: 528px;
-    right: 0px;
-    margin: auto 0;
-    width: 24px;
-    height: 24px;
-    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAMvSURBVHja7Js9aBRBFMd/d1lPY6FiJVjY+Fkoxl7wA1Q0prQRS6tgoZV2MWIRRVHUUq3U+JnESrS2sBXBzipREWMlATXwt8gFznC5nd15M7Nn8uC45nZnfr/dY96+N1uTxFKOOks8lgUU/H2t4tJqIQUcAiaBGeBymcECRgO4B/wBPgJ9zkdKcvkclfRL/8ZtSTXH40N+GpLGF8zth6Q9Lse7DHCsDXxVJLSDLyQhb4B+Sb/VOVJJ6ATfKqGvrIDjDvCpJLjAz8d0JwmLDTBQAD62hIakiYJzm5a021VAfwn4WBLKwLdK2JUnIJP0XX4RSoIP/Hy8W3jeepv1dL3nmjwI3DLOExrAU2DA8zwb8xKhGeCuwYQtJTSAZwbwAHdcEqFM0mPZhO/foSHppdFcrraby2IDV0FCcPi8PCClhCjwLplgCgkrDeGv5I3pcjViSogK7yogloTo8EUEhJaQBL6oAGsJ9yVtkrRD0qsU8JKolagKZ8AD4ETFymFXgPOAQpXE5mMWOAk86XZ4n6pwlSSUhvcti1dBghe8RV8gpYQRX3irxkgKCSPABV94y85QTAlm8NatsRgSTOGBUnmAS57w3KiA0Ro3gHOW8KEEAOwE3hvfXWubFauu6A6vCND07OmW9viq5vpsGT3AtRAN2XoA+BfAwQBiTweoNpMZw48BRwKuAoPN7zNVWwZjwAfpO9S7DN5cQmYAPw4cTvAsYPJ3qHcpvNmdUO9ieBMJZQT0AhMVgfeWUC8BP87cjjHfuA6sATY0c4c0EgpUUHslvTaq3l5aUL1N1oarAnxSCVWBTyYhJvyw41XJJI3GkpAH/yYyfHQJi01gdUL4qBKqCh9NQrtBx4wGvGi0XS6T9MhoTkN5AtZVDN5awlTePsGfwDfPjGwYGDKu3s4Cp4BRz/N8cskED0iaqciVt7wTvkra5roKlJEQGt5HwhdJ24vmAUUkDEV+VyCT9NBxbp/bXXnXTNBFQmz4IhI6wrs+C+zvICEVvIuEKUlbrZ4G97WRkBq+k4RJSVusd4ntlfSheVudrQh8q4SbmntH6K2kzSF3if1Xsfzq7LKAJR5/BwCdAQBJn4egPgAAAABJRU5ErkJggg==') no-repeat;
-    background-size: 24px 24px;
-    -webkit-background-size: 24px 24px;
-    -moz-background-size: 24px 24px;
-    -o-background-size: 24px 24px;
-}
-
-.mediabox-close:hover {
-    opacity: 0.5;
-}
-
-@media all and (max-width: 768px) and (min-width: 10px) {
-    .mediabox-content {
-        max-width: 90%;
-    }
-}
-
-@media all and (max-width: 600px) and (min-width: 10px) {
-    .mediabox-content iframe {
-        height: 320px !important;
-    }
-
-    .mediabox-close {
-        bottom: 362px;
-    }
-}
-
-@media all and (max-width: 480px) and (min-width: 10px) {
-    .mediabox-content iframe {
-        height: 220px !important;
-    }
-
-    .mediabox-close {
-        bottom: 262px;
-    }
-} 
-.MMM-Recipe rname { 
-font-size: .3em;
-line-height: 130%; 
+.MMM-Recipe .limit{
+    width:320px; 
+	padding-bottom: 10px;
+	font-size: .65em;
+	line-height: 89%;
+	float: left;
 }
 .MMM-Recipe .thumbs{
 	float: left;
 	margin: 10px;
 	width: 138px;
 	height: 137px;
+	padding-bottom: 10px;
 }
-.MMM-Recipe .ingred {
-	width 75%;
+.MMM-Recipe .ingred { 
 	font-size: .5em;
-	margin-bottom: 4px; 
+	margin-bottom: 4px;
+    float: left;	
+}
+.MMM-Recipe rname { 
+font-size: .65em;
+line-height: 130%; 
 }
 .MMM-Recipe .title { 
-	font-size: .5em;
-	line-height: 90%;
-    margin: 0;	
-} 
-* {
-  box-sizing: border-box;
-}
-.boxinst { 
-  font-size: .5em;
-}
-.box {
-  float: left;
-  width: 48.00%;
-  padding: 5px;
-}
-
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-.MMM-Recipe table {
-	 padding: 0px;
-	 width: 400px;
-}
-.MMM-Recipe th {
-	width: 255px;
-	line-height: .5em;
-	vertical-align:top;
-	margin: 0; 
-}
-.MMM-Recipe td {
-	width: 155px;
-	vertical-align:top;
-	margin: 0; 
-}
-.MMM-Recipe tr {vertical-align:top;}
+	font-size: .58em;
+    line-height: 90%;
+    float: left;
+}   
+.MMM-Recipe label {
+      display: inline-block; 
+      color: #fff;
+      background-color: #3c8dbc;
+      border-color: #367fa9;
+      border-radius: 2px;
+      cursor: pointer;
+	  padding: 8px;
+	  
+    }
+    .checker:checked + .modal {
+      display: flex;
+    }
+.MMM-Recipe    .modal {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      text-align: center;
+      background-color: rgba(0,0,0,.8); 
+	  font-size: 1em;
+    }
+.MMM-Recipe    .modal-body {
+      width: 400px;
+      background-color: #000;
+	  color: #fff;
+      border-radius: 4px;
+      padding: 15px;
+    }
+ .MMM-Recipe   .modal-content {
+	  line-height: 1.1em;
+      font-size: .87em;	  
+      padding: 15px; 
+    }
+ .MMM-Recipe   .modal-footer {
+      overflow: hidden;
+    }

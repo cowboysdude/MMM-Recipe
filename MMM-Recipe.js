@@ -4,6 +4,8 @@
    * By cowboysdude
    * 
    */
+  var $;
+  
   Module.register("MMM-Recipe", {
 
       // Module config defaults.
@@ -19,11 +21,11 @@
 
       // Define required scripts.
       getScripts: function() {
-          return ["moment.js", "mediabox.js"];
+          return ["moment.js", "jquery.js","lity.js"];
       },
 
       getStyles: function() {
-          return ["MMM-Recipe.css", "mediabox.css"];
+          return ["MMM-Recipe.css", "lity.css"];
       },
 
       // Define start sequence.
@@ -44,8 +46,7 @@
 
       getDom: function() {
 
-          var mixins = this.recipe;
-		  var image = this.image;
+          var mixins = this.recipe; 
 		  var list = this.list;
 		   
           var wrapper = document.createElement("div");
@@ -69,21 +70,22 @@
           var x = document.createElement("div");
           x.classList.add("ingred");
           if (this.config.video != false) {
-              x.innerHTML = `<a href="${mixins.video}" class="mediabox"><img class= thumbs src="${image}"></a><br>
-			                `;
+			  var vidID = mixins.videoId;
+			  var vid  = mixins.video;
+              var image = this.image;			  
+              x.innerHTML = '<a class="btn" href="//www.youtube.com/watch?v=' + vidID + '&rel=0" data-lity><img class ="click" src=' + image + ' width=136px; height=137px;></a>';
           } else {
               x.innerHTML = `<img class= thumbs src="${image}">`;
           }
-          wrapper.appendChild(x);
-
+          wrapper.appendChild(x); 
+		 
+		  
           var ingred = document.createElement("ul");
           ingred.classList.add("flex-item", "title");
           for (i = 0; i < list.length; i++) {
               ingred.innerHTML += `<li>${list[i].ingredient}</li>`
           }
           wrapper.appendChild(ingred);
-
-          MediaBox('.mediabox');
 
           return wrapper;
 

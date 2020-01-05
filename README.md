@@ -23,6 +23,7 @@ You can decide whether or not you want to have access to the video by using the 
 
    # Example:
             {
+	    disabled: false,
            module: 'MMM-Recipe',
            position: 'bottom_bar',
            config: {

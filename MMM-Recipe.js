@@ -82,7 +82,10 @@
 		  
 		  wrapper.appendChild(top);
           var ingred = document.createElement("ul");
-          ingred.classList.add("flex-item", "ingreid"); 
+          ingred.classList.add("flex-item", "ingreid");
+	      //SAM this is where my ingredients are being looped to show each one.... but I cannot do what I'm doing above
+	      //in the instructions because then I end up with a button for each seperate ingredient....which I don't want
+	      //as you know it re-creates a button a for each individual ingredient
           for (i = 0; i < list.length; i++) { 
           ingred.innerHTML += `<li>${list[i].ingredient}</li>`
           }

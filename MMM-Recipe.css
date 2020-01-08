@@ -1,3 +1,6 @@
+.MMM-Recipe {
+	width: 60%;
+}
 .MMM-Recipe #flex-container {
     display: flex;
     flex-direction: row;
@@ -9,9 +12,13 @@
 
 .MMM-Recipe .flex-item {
     width: 60.5%;
-    height: 200px;
+    height: 100px;
     align-items: left;
-    line-height: 87%;	
+    line-height: 65%;	
+}
+.MMM-Recipe .ingreid {
+	font-size: 13px;
+	color: white;
 }
 .MMM-Recipe ul {
   list-style: none;
@@ -42,12 +49,12 @@
 	margin: 10px;
 	width: 138px;
 	height: 137px;
-	padding-bottom: 10px;
+	border:12px solid white;
 }
-.MMM-Recipe .ingred { 
+.MMM-Recipe .video { 
 	font-size: .5em;
-	margin-bottom: 4px;
-    float: left;	
+    float: left;
+    margin: 10px;	
 }
 .MMM-Recipe rname { 
 font-size: .65em;
@@ -57,7 +64,8 @@ line-height: 130%;
 	font-size: .58em;
     line-height: 90%;
     float: left;
-}   
+	color: white;
+} 
 .MMM-Recipe label {
       display: inline-block; 
       color: #fff;
@@ -71,7 +79,7 @@ line-height: 130%;
     .checker:checked + .modal {
       display: flex;
     }
-.MMM-Recipe    .modal {
+.MMM-Recipe .modal {
       display: none;
       justify-content: center;
       align-items: center;
@@ -84,18 +92,19 @@ line-height: 130%;
       background-color: rgba(0,0,0,.8); 
 	  font-size: 1em;
     }
-.MMM-Recipe    .modal-body {
+.MMM-Recipe  .modal-body {
       width: 400px;
       background-color: #000;
 	  color: #fff;
       border-radius: 4px;
       padding: 15px;
     }
- .MMM-Recipe   .modal-content {
+ .MMM-Recipe .modal-content {
+	  column-count: 2;
 	  line-height: 1.1em;
       font-size: .87em;	  
-      padding: 15px; 
+      padding: 5px; 
     }
- .MMM-Recipe   .modal-footer {
+ .MMM-Recipe .modal-footer {
       overflow: hidden;
     }

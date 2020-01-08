@@ -51,6 +51,20 @@
 		   
           var wrapper = document.createElement("div");
           wrapper.id = "flex-container";
+		  
+		  
+
+          var x = document.createElement("div");
+          x.classList.add("video");
+          if (this.config.video != false) {
+			  var vidID = mixins.videoId;
+			  var vid  = mixins.video;
+              var image = this.image;			  
+              x.innerHTML = '<a class="btn" href="//www.youtube.com/watch?v=' + vidID + '&rel=0" data-lity><img class ="click" src=' + image + ' width=136px; height=137px;></a>';
+          } else {
+              x.innerHTML = `<img class= thumbs src="${image}">`;
+          }
+          wrapper.appendChild(x); 
 
           var top = document.createElement("div");
           top.classList.add("flex-item", "title");
@@ -64,31 +78,17 @@
 				<label for="o">close</label>
 				</div>
 			  </div>
-			</div>  `;
-          wrapper.appendChild(top);
-
-          var x = document.createElement("div");
-          x.classList.add("ingred");
-          if (this.config.video != false) {
-			  var vidID = mixins.videoId;
-			  var vid  = mixins.video;
-              var image = this.image;			  
-              x.innerHTML = '<a class="btn" href="//www.youtube.com/watch?v=' + vidID + '&rel=0" data-lity><img class ="click" src=' + image + ' width=136px; height=137px;></a>';
-          } else {
-              x.innerHTML = `<img class= thumbs src="${image}">`;
-          }
-          wrapper.appendChild(x); 
-		 
+			</div> `;
 		  
+		  wrapper.appendChild(top);
           var ingred = document.createElement("ul");
-          ingred.classList.add("flex-item", "title");
-          for (i = 0; i < list.length; i++) {
-              ingred.innerHTML += `<li>${list[i].ingredient}</li>`
+          ingred.classList.add("flex-item", "ingreid"); 
+          for (i = 0; i < list.length; i++) { 
+          ingred.innerHTML += `<li>${list[i].ingredient}</li>`
           }
           wrapper.appendChild(ingred);
 
           return wrapper;
-
       },
 
       processRecipe: function(data) {

@@ -27,7 +27,6 @@ module.exports = NodeHelper.create({
                     var match = url.match(regExp);
                     return (match && match[7].length == 11) ? match[7] : false;
                 }
-
                 var recipe = {
                     recipeName: meal.strMeal,
                     instruction: meal.strInstructions,
@@ -39,7 +38,7 @@ module.exports = NodeHelper.create({
                     ingredients: []
                 };
 
-                for (var i = 1; i <= 24; i++) {
+                for (var i = 1; i <= 54; i++) {
                     if (!meal['strIngredient' + i]) {
                         break;
                     }
@@ -47,7 +46,6 @@ module.exports = NodeHelper.create({
                         ingredient: meal['strMeasure' + i] + " " + meal['strIngredient' + i]
                     });
                 }
-                
                 this.sendSocketNotification('RECIPE_RESULT', recipe);
             }
         });

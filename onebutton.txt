@@ -1,0 +1,61 @@
+I have an Object like this:
+var recipe: {
+                    recipeName: meal.strMeal,
+                    instruction: meal.strInstructions,
+                    videoId: youtube_parser(meal.strYoutube),
+                    video: meal.strYoutube,
+                    thumb: meal.strMealThumb,
+                    nation: meal.strArea,
+                    category: meal.strCategory,
+                    ingredients: [object, object, object, etc]
+             }
+
+Because the data shows seperate strMeasure and strIngredient as seperate I have to marry the two 
+to make it a readable ingredient like this: 
+
+ for (var i = 1; i <= 54; i++) {
+                    if (!meal['strIngredient' + i]) {
+                        break;
+                    }
+                    recipe.ingredients.push({
+                        ingredient: meal['strMeasure' + i] + " " + meal['strIngredient' + i]
+					});
+                }
+
+That marries the measure to the correct ingredient so it's easy to work with.
+and it pushes to the ingredient to the ingredients array at the same time.. 
+so you end up with the structure below
+
+ingredients: [{ingredients0: 1 cup milk}
+              {ingredients1: 1/2 cup chocolate chips}
+              {ingredients2: etc...}
+              ]
+
+I then loop through them with a for loop and present them on the front end as a list..... 
+works great in present format the problem is if I try to put them in a popup button format
+like the instructions then if I have 10 ingredients I get 10 buttons... only want 1 button :)
+I've tried all the magic I know and the problem is I'm WAY over thinking this .....  I need to 
+get them into one object as a list so in the front end I can just use the key:value method to put
+them in a button so it pops up with the list :)
+
+Ie: <div class="modal-content">Ingredients:<br>${mixins.ingredients}</div>
+
+And get one button instead of 10 LOL
+
+
+Currently: 
+Structure is : ingredients: [
+                            {ingredient: blah}, 
+                            {ingredient: mix}, 
+                            {etc}
+                            ]
+Want/need :  ingredients: {1 cup milk, 1/2 cup chocolate chips, etc}  
+             or 
+             ingredients: [{1 cup milk, 1/2 cup chocolate chips, etc}]
+
+On the front end I have parsed them differently........everything but the ingredients are in this.mixins
+ingredients are in this.list if you were confused by what you were seeing :) 
+
+
+
+

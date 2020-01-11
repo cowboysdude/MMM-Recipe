@@ -81,16 +81,24 @@
 			</div> `;
 		  
 		  wrapper.appendChild(top);
-          var ingred = document.createElement("ul");
-          ingred.classList.add("flex-item", "ingreid");
-	      //SAM this is where my ingredients are being looped to show each one.... but I cannot do what I'm doing above
-	      //in the instructions because then I end up with a button for each seperate ingredient....which I don't want
-	      //as you know it re-creates a button a for each individual ingredient
-          for (i = 0; i < list.length; i++) { 
-          ingred.innerHTML += `<li>${list[i].ingredient}</li>`
-          }
-          wrapper.appendChild(ingred);
+					if(list.length){
+							var ingred = document.createElement("ul");
+							ingred.classList.add("flex-item", "ingreid");
+						//SAM this is where my ingredients are being looped to show each one.... but I cannot do what I'm doing above
+						//in the instructions because then I end up with a button for each seperate ingredient....which I don't want
+						//as you know it re-creates a button a for each individual ingredient
 
+							for (i = 0; i < list.length; i++) { 
+								ingred.innerHTML += `<li>${list[i].ingredient}</li>`
+							}
+							var button = document.createElement("div");
+							button.appendChild(ingred);
+							button.id=mixins.recipeName;
+							button.addEventListener("click",function(){  // this = button 
+										Log.log("button id="+this.id+" contains "+ this.firstChild.childElementCount+" ingredients");  // ul  first child of button
+									});
+							wrapper.appendChild(button);
+					}
           return wrapper;
       },
 

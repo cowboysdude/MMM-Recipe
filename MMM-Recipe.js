@@ -66,39 +66,39 @@
           }
           wrapper.appendChild(x); 
 
-          var top = document.createElement("div");
-          top.classList.add("flex-item", "title");
-          top.innerHTML = `${mixins.recipeName}<br>Nationality: ${mixins.nation}<br>Category: ${mixins.category}<br>
-		                        <BR><BR><label for="o">Instructions</label>
+          let template = `${mixins.recipeName}<br>
+                Nationality: ${mixins.nation}<br>
+                Category: ${mixins.category}<br>
+		        <br><br>
+		        <label for="o">More info</label>
 			<input class="checker" type="checkbox" id="o" hidden>
 				<div class="modal">
 				<div class="modal-body">
-				<div class="modal-content">Instructions:<br>${mixins.instruction}</div>
+				<div class="modal-content">`
+
+                  if(list.length) {
+                      template += '<h3>Ingredients:</h3><ul>'
+                      for (i = 0; i < list.length; i++) {
+                          template += `<li>${list[i].ingredient}</li>`
+                      }
+                      template += '</ul></section>'
+                  }
+
+          template += `<h3>Instructions:</h3>
+                    <div class="columns">${mixins.instruction}</div>
+                </div>
 				<div class="modal-footer">
 				<label for="o">close</label>
 				</div>
 			  </div>
 			</div> `;
+
+          var top = document.createElement("div");
+          top.innerHTML = template;
+          top.classList.add("flex-item", "title");
 		  
 		  wrapper.appendChild(top);
-					if(list.length){
-							var ingred = document.createElement("ul");
-							ingred.classList.add("flex-item", "ingreid");
-						//SAM this is where my ingredients are being looped to show each one.... but I cannot do what I'm doing above
-						//in the instructions because then I end up with a button for each seperate ingredient....which I don't want
-						//as you know it re-creates a button a for each individual ingredient
 
-							for (i = 0; i < list.length; i++) { 
-								ingred.innerHTML += `<li>${list[i].ingredient}</li>`
-							}
-							var button = document.createElement("div");
-							button.appendChild(ingred);
-							button.id=mixins.recipeName;
-							button.addEventListener("click",function(){  // this = button 
-										Log.log("button id="+this.id+" contains "+ this.firstChild.childElementCount+" ingredients");  // ul  first child of button
-									});
-							wrapper.appendChild(button);
-					}
           return wrapper;
       },
 

@@ -14,7 +14,6 @@ Module.register("MMM-Recipe", {
         animationSpeed: 1000,
         initialLoadDelay: 1130, // 0 seconds delay
         retryDelay: 2500,
-        header: "",
         maxWidth: "220px",
         video: true
     },
@@ -125,7 +124,7 @@ Module.register("MMM-Recipe", {
     socketNotificationReceived: function(notification, payload) {
         if (notification === "RECIPE_RESULT") {
             this.processRecipe(payload);
-            this.updateDom(this.config.fadeSpeed);
+            this.updateDom();
         }
         this.updateDom(this.config.initialLoadDelay);
     },

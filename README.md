@@ -1,22 +1,18 @@
 # MMM-Recipe
 
- STILL BEING TESTED AND MMM-voice has conflicts with it at the moment..........working on it.
+ FINALLY it's ready..... :)  
  
- Final testing has begun!!  As of 1/10/2020...... will be finished soon!
- 
-Daily recipe for MagicMirror2  ALL NEW FOR 2019
-This is a positional module.....bottom_bar
-If you try to put it in other positions you will have to fix the css ..... I built this to work in one position and the reason for that is the list of ingredients vary from recipe to recipe and at times the entire bottom_bar space will be needed!
+Daily recipe for MagicMirror2  ALL NEW FOR 2020
 
 #Examples:
 
-Simple recipe
+Recipe
 ![](examples/recipe1.png)
 
-Example showing video
+Ingredients and Instructions
 ![](examples/recipe2.png)
 
-
+Video to go along with recipe!
 ![](examples/recipe3.png)
 
 This module shows a menu daily on the MagicMirror2

@@ -7,13 +7,13 @@ Daily recipe for MagicMirror2  ALL NEW FOR 2020
 #Examples:
 
 Recipe
-![](examples/recipe1.png)
+![](pics/recipe1.png)
 
 Ingredients and Instructions
-![](examples/recipe2.png)
+![](pics/recipe2.png)
 
 Video to go along with recipe!
-![](examples/recipe3.png)
+![](pics/recipe3.png)
 
 This module shows a menu daily on the MagicMirror2
 

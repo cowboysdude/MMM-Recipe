@@ -1,7 +1,7 @@
 /* Magic Mirror
  * Module: MMM-Recipe
  *
- * By cowboysdude
+ * By cowboysdude with help from Sam and JimL 
  * 
  */
 var $;
@@ -14,6 +14,7 @@ Module.register("MMM-Recipe", {
         animationSpeed: 1000,
         initialLoadDelay: 1130, // 0 seconds delay
         retryDelay: 2500,
+        header: "",
         maxWidth: "220px",
         video: true
     },
@@ -49,7 +50,7 @@ Module.register("MMM-Recipe", {
         var list = this.list;
 
         var wrapper = document.createElement("div");
-        wrapper.id = "flex-container";
+        //wrapper.id = "flex-container";
 
 
 
@@ -80,7 +81,7 @@ Module.register("MMM-Recipe", {
             for (i = 0; i < list.length; i++) {
                 template += `<li>${list[i].ingredient}</li>`
             }
-            template += '</ul></section>'
+            template += '</ul>'
         }
 
         template += `<h3>Instructions:</h3>
@@ -94,7 +95,7 @@ Module.register("MMM-Recipe", {
 
         var top = document.createElement("div");
         top.innerHTML = template;
-        top.classList.add("flex-item", "title");
+        top.classList.add("title");
 
         wrapper.appendChild(top);
 
@@ -106,6 +107,7 @@ Module.register("MMM-Recipe", {
         this.recipe = data;
         this.list = data.ingredients;
         this.image = data.thumb;
+        console.log(this.image);
         this.loaded = false;
     },
 
@@ -124,9 +126,8 @@ Module.register("MMM-Recipe", {
     socketNotificationReceived: function(notification, payload) {
         if (notification === "RECIPE_RESULT") {
             this.processRecipe(payload);
-            this.updateDom();
+            this.updateDom(this.config.fadeSpeed);
         }
         this.updateDom(this.config.initialLoadDelay);
     },
-
 });

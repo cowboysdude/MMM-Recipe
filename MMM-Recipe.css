@@ -100,11 +100,14 @@ line-height: 130%;
       padding: 15px;
     }
  .MMM-Recipe .modal-content {
-	  column-count: 2;
 	  line-height: 1.1em;
       font-size: .87em;	  
       padding: 5px; 
     }
+
+.MMM-Recipe .modal-content .columns {
+    column-count: 2;
+}
  .MMM-Recipe .modal-footer {
       overflow: hidden;
     }

@@ -44,10 +44,7 @@ module.exports = NodeHelper.create({
                     }
                     recipe.ingredients.push({
                         ingredient: meal['strMeasure' + i] + " " + meal['strIngredient' + i]
-                    });
-            // Sam I need to push each object created above into one object either here or in the main js.
-            // currently as you can see I'm pushing each into an array. I did it this way because the list
-            // of ingredients from the data showed was a mess and this is how I fixed it... 
+                    }); 
                 }
                 this.sendSocketNotification('RECIPE_RESULT', recipe);
             }
@@ -61,6 +58,4 @@ module.exports = NodeHelper.create({
             this.getRecipe(payload);
         }
     }
-
-
 });

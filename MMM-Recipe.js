@@ -1,72 +1,72 @@
 /* Magic Mirror
-   * Module: MMM-Recipe
-   *
-   * By cowboysdude
-   * 
-   */
-  var $;
-  
-  Module.register("MMM-Recipe", {
+ * Module: MMM-Recipe
+ *
+ * By cowboysdude
+ * 
+ */
+var $;
 
-      // Module config defaults.
-      defaults: {
-          updateInterval: 180 * 60 * 1000, // every 3 hours
-          animationSpeed: 1000,
-          initialLoadDelay: 1130, // 0 seconds delay
-          retryDelay: 2500,
-          header: "",
-          maxWidth: "220px",
-          video: true
-      },
+Module.register("MMM-Recipe", {
 
-      // Define required scripts.
-      getScripts: function() {
-          return ["moment.js", "jquery.js","lity.js"];
-      },
+    // Module config defaults.
+    defaults: {
+        updateInterval: 180 * 60 * 1000, // every 3 hours
+        animationSpeed: 1000,
+        initialLoadDelay: 1130, // 0 seconds delay
+        retryDelay: 2500,
+        header: "",
+        maxWidth: "220px",
+        video: true
+    },
 
-      getStyles: function() {
-          return ["MMM-Recipe.css", "lity.css"];
-      },
+    // Define required scripts.
+    getScripts: function() {
+        return ["moment.js", "jquery.js", "lity.js"];
+    },
 
-      // Define start sequence.
-      start: function() {
-          var info = this.data;
-          var moduleInfo = JSON.parse(JSON.stringify(info));
-          Log.info("Starting module: " + this.name);
+    getStyles: function() {
+        return ["MMM-Recipe.css", "lity.css"];
+    },
 
-          // Set locale.
-          moment.locale(config.language);
+    // Define start sequence.
+    start: function() {
+        var info = this.data;
+        var moduleInfo = JSON.parse(JSON.stringify(info));
+        Log.info("Starting module: " + this.name);
 
-          this.today = "";
-          this.recipe = [];
-		  this.list = [];
-		  this.image = "";
-          this.scheduleUpdate();
-      },
+        // Set locale.
+        moment.locale(config.language);
 
-      getDom: function() {
+        this.today = "";
+        this.recipe = [];
+        this.list = [];
+        this.image = "";
+        this.scheduleUpdate();
+    },
 
-          var mixins = this.recipe; 
-		  var list = this.list;
-		   
-          var wrapper = document.createElement("div");
-          wrapper.id = "flex-container";
-		  
-		  
+    getDom: function() {
 
-          var x = document.createElement("div");
-          x.classList.add("video");
-          if (this.config.video != false) {
-			  var vidID = mixins.videoId;
-			  var vid  = mixins.video;
-              var image = this.image;			  
-              x.innerHTML = '<a class="btn" href="//www.youtube.com/watch?v=' + vidID + '&rel=0" data-lity><img class ="click" src=' + image + ' width=136px; height=137px;></a>';
-          } else {
-              x.innerHTML = `<img class= thumbs src="${image}">`;
-          }
-          wrapper.appendChild(x); 
+        var mixins = this.recipe;
+        var list = this.list;
 
-          let template = `${mixins.recipeName}<br>
+        var wrapper = document.createElement("div");
+        wrapper.id = "flex-container";
+
+
+
+        var x = document.createElement("div");
+        x.classList.add("video");
+        if (this.config.video != false) {
+            var vidID = mixins.videoId;
+            var vid = mixins.video;
+            var image = this.image;
+            x.innerHTML = '<a class="btn" href="//www.youtube.com/watch?v=' + vidID + '&rel=0" data-lity><img class ="click" src=' + image + ' width=136px; height=137px;></a>';
+        } else {
+            x.innerHTML = `<img class= thumbs src="${image}">`;
+        }
+        wrapper.appendChild(x);
+
+        let template = `${mixins.recipeName}<br>
                 Nationality: ${mixins.nation}<br>
                 Category: ${mixins.category}<br>
 		        <br><br>
@@ -76,15 +76,15 @@
 				<div class="modal-body">
 				<div class="modal-content">`
 
-                  if(list.length) {
-                      template += '<h3>Ingredients:</h3><ul>'
-                      for (i = 0; i < list.length; i++) {
-                          template += `<li>${list[i].ingredient}</li>`
-                      }
-                      template += '</ul></section>'
-                  }
+        if (list.length) {
+            template += '<h3>Ingredients:</h3><ul>'
+            for (i = 0; i < list.length; i++) {
+                template += `<li>${list[i].ingredient}</li>`
+            }
+            template += '</ul></section>'
+        }
 
-          template += `<h3>Instructions:</h3>
+        template += `<h3>Instructions:</h3>
                     <div class="columns">${mixins.instruction}</div>
                 </div>
 				<div class="modal-footer">
@@ -93,42 +93,42 @@
 			  </div>
 			</div> `;
 
-          var top = document.createElement("div");
-          top.innerHTML = template;
-          top.classList.add("flex-item", "title");
-		  
-		  wrapper.appendChild(top);
+        var top = document.createElement("div");
+        top.innerHTML = template;
+        top.classList.add("flex-item", "title");
 
-          return wrapper;
-      },
+        wrapper.appendChild(top);
 
-      processRecipe: function(data) {
-          this.today = data.Today;
-          this.recipe = data;
-		  this.list = data.ingredients;
-		  this.image = data.thumb;
-          console.log(this.image);
-          this.loaded = false;
-      },
+        return wrapper;
+    },
 
-      scheduleUpdate: function() {
-          setInterval(() => {
-              this.getRecipe();
-          }, this.config.updateInterval);
+    processRecipe: function(data) {
+        this.today = data.Today;
+        this.recipe = data;
+        this.list = data.ingredients;
+        this.image = data.thumb;
+        console.log(this.image);
+        this.loaded = false;
+    },
 
-          this.getRecipe(this.config.initialLoadDelay);
-      },
+    scheduleUpdate: function() {
+        setInterval(() => {
+            this.getRecipe();
+        }, this.config.updateInterval);
 
-      getRecipe: function() {
-          this.sendSocketNotification('GET_RECIPE');
-      },
+        this.getRecipe(this.config.initialLoadDelay);
+    },
 
-      socketNotificationReceived: function(notification, payload) {
-          if (notification === "RECIPE_RESULT") {
-              this.processRecipe(payload);
-              this.updateDom(this.config.fadeSpeed);
-          }
-          this.updateDom(this.config.initialLoadDelay);
-      },
+    getRecipe: function() {
+        this.sendSocketNotification('GET_RECIPE');
+    },
 
-  });
+    socketNotificationReceived: function(notification, payload) {
+        if (notification === "RECIPE_RESULT") {
+            this.processRecipe(payload);
+            this.updateDom(this.config.fadeSpeed);
+        }
+        this.updateDom(this.config.initialLoadDelay);
+    },
+
+});

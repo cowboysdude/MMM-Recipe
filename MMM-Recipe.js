@@ -107,7 +107,6 @@ Module.register("MMM-Recipe", {
         this.recipe = data;
         this.list = data.ingredients;
         this.image = data.thumb;
-        console.log(this.image);
         this.loaded = false;
     },
 

@@ -29,5 +29,5 @@ You can decide whether or not you want to have access to the video by using the 
         video: true, //default is true if you want to be able to play video of recipe
         updateInterval: 180 * 60 * 1000, // every 3 hours Suggest you don't do it more often then this.
     }
-}
+},
 ```
